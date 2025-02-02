@@ -1,0 +1,11 @@
+datasets
+peft
+streamlit
+accelerate
+adapters
+pypdf
+sentence_transformers
+transformers
+langchain
+langchain-community
+base64
