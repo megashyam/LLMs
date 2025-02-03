@@ -69,7 +69,7 @@ def file_prep(file):
 
 
 @st.cache_data
-def displayPDF(file):
+def display_file(file):
     with open(file, "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
@@ -78,7 +78,7 @@ def displayPDF(file):
 
 
 def main():
-    st.title("Podcast Summarizer")
+    st.title("Pegasus Podcast Summarizer")
 
     choice = st.sidebar.selectbox("Choice:", ["Summarize Text", "Summarize Document"])
     if choice == "Summarize Text":
@@ -107,7 +107,7 @@ def main():
                 col1, col2 = st.columns([1, 1])
                 with col1:
                     st.info("File uploaded successfully")
-                    displayPDF(filepath)
+                    display_file(filepath)
                 with col2:
                     st.markdown("**Summary Result**")
                     try:
