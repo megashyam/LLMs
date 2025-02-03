@@ -18,7 +18,6 @@ This repository contains a Streamlit app summarizes podcast transcripts using a 
 
 <br>
 
-## Fine-Tuning the Pegasus Model
 ### LoRA Integration
 The Pegasus large model is fine-tuned using LoRA (Low-Rank Adaptation). LoRA adapts large pre-trained models with fewer trainable parameters, making the fine-tuning process more efficient and reducing memory usage.
 
