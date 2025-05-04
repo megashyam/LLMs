@@ -1,12 +1,3 @@
-
-get_ipython().system(' pip install numpy')
-get_ipython().system(' pip install pandas')
-get_ipython().system(' pip install transformers')
-get_ipython().system(' pip install datasets')
-get_ipython().system(' pip install torch')
-get_ipython().system(' pip install tqdm')
-get_ipython().system(' pip install gradio')
-
 import pandas as pd
 import numpy as np
 from datasets import  load_dataset
@@ -22,61 +13,46 @@ from torch.utils.data import Dataset, DataLoader, random_split
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-#from google.colab import drive
-#drive.mount('/content/drive')
 
 
 device=(torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu'))
 
-
-
-
 dataset=load_dataset('cyberblip/Travel_india')
 model_name='google/flan-t5-base'
 
-
-
 df=pd.DataFrame(dataset['train'])
-
 
 
 tokenizer=AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token=tokenizer.eos_token
 
 
-# In[7]:
-
-
 pre_tuned_model=AutoModelForSeq2SeqLM.from_pretrained(model_name)
 model=AutoModelForSeq2SeqLM.from_pretrained(model_name)
+
+
 
 def generate_output(text, model=model):
 
     model=model.to(device)
-
-
+    
     text='Question: '+text
     inputs=tokenizer(text, return_tensors='pt').to(device)
 
-    outputs=model.generate(
-    input_ids=inputs['input_ids'],
-        attention_mask=inputs['attention_mask'],
-            max_length=700,
-    num_return_sequences=1,
-    do_sample=True,
-    top_k=8,
-    top_p=0.95,
-    temperature=0.7,
-    )
-
+    outputs=model.generate(input_ids=inputs['input_ids'],
+                           attention_mask=inputs['attention_mask'],
+                           max_length=700,
+                           num_return_sequences=1,
+                           do_sample=True,
+                           top_k=8,
+                           top_p=0.95,
+                           temperature=0.7,
+                          )
+    
     decoded=tokenizer.decode(outputs[0],skip_special_tokens=True)
     decoded=f'{text} \n Answer: {decoded}'
 
-
     return decoded
-
-
-# In[39]:
 
 
 s='What are the popular dishes in Mumbai?'
@@ -84,15 +60,10 @@ text=generate_output(s,pre_tuned_model)
 print(text)
 
 
-# In[26]:
-
 
 s='Plan a 5-day itinerary for Delhi.'
 text=generate_output(s,pre_tuned_model)
 print(text)
-
-
-# In[30]:
 
 
 s=' What is the best time to visit Goa?'
@@ -129,41 +100,26 @@ class CutomDataset(Dataset):
             "target":output_tokens['input_ids']
         }
 
-
-
 dataset=CutomDataset(df, tokenizer)
 print(dataset)
-
-
-# In[14]:
 
 
 train_size=int(.8* len(dataset))
 val_size=len(dataset)-train_size
 
 
-# In[15]:
-
 
 train_data, val_data=random_split(dataset, [train_size, val_size])
 
 
-# In[16]:
-
 
 batch_size=8
 num_epochs=10
-gpu=torch.cuda.get_device_name(0) if torch.cuda.is_available() else "CPU"
-
-
-# In[17]:
 
 
 train_loader=DataLoader(train_data, batch_size=batch_size,shuffle=True)
 val_loader=DataLoader(val_data, batch_size=batch_size)
 
-
-# In[18]:
 
 
 model=model.to(device)
@@ -171,13 +127,9 @@ criterion= torch.nn.CrossEntropyLoss(ignore_index=tokenizer.pad_token_id)
 optimizer=torch.optim.AdamW(model.parameters(), lr=5e-4)
 
 
-# In[19]:
-
 
 results=pd.DataFrame(columns=['epoch','transformer','batch_size','gpu','train_loss','val_loss','epc_dur'])
 
-
-# In[20]:
 
 
 for e in range(num_epochs):
@@ -238,7 +190,7 @@ for e in range(num_epochs):
         'epoch':e+1,
         'transformer':model_name,
         'batch_size':batch_size,
-        'gpu':gpu,
+        'gpu':device,
         'train_loss':avg_ep_train_loss,
         'val_loss':avg_ep_val_loss,
         'epc_dur':epoch_dur
@@ -261,23 +213,17 @@ text=generate_output(s,model)
 print(text)
 
 
-# In[23]:
-
 
 s='Plan a 5-day itinerary for Delhi.'
 text=generate_output(s,model)
 print(text)
 
 
-# In[24]:
-
 
 s=' What is the best time to visit Goa?'
 text=generate_output(s,model)
 print(text)
 
-
-# In[61]:
 
 
 interface = gr.Interface(
@@ -290,14 +236,10 @@ interface = gr.Interface(
 interface.launch()
 
 
-# In[ ]:
 
+save_path_m= "/path/travel_india_finetuned_flan-t5-base'"
+save_path_t= "/path/travel_india_finetuned_flan-t5-bas-tokenizer'"
 
-save_path_m= "/content/drive/MyDrive//travel_india_finetuned_flan-t5-base'"
-save_path_t= "/content/drive/MyDrive//travel_india_finetuned_flan-t5-bas-tokenizer'"
-
-
-# In[ ]:
 
 
 model.save_pretrained(save_path_m)
