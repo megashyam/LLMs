@@ -25,14 +25,16 @@ This project demonstrates the core building blocks of transformer architectures,
 
 
 ## 🏗 GPT-2 Architecture Components
-![GPT Architecture](images/gpt2.png)
+
+<img src="images/gpt2.png" alt="Alt text" width="80%"/>
+
 
 The GPT-2 model in this project is built from scratch and consists of the following key components:
 ### 1. Token Embeddings
 - Converts input token IDs into dense vectors.
 - Captures semantic information for each token in a continuous space.
 
-![Token Embeddings](images/token_embeddings.png)
+<img src="images/token_embeddings.png" alt="Alt text" width="80%"/>
 
 ---
 
@@ -40,7 +42,7 @@ The GPT-2 model in this project is built from scratch and consists of the follow
 - Adds information about token position in the sequence.
 - Ensures the model is aware of token order since transformers are permutation-invariant.
 
-![Positional Embeddings](images/positional_embeddings.png)
+<img src="images/positional_embeddings.png" alt="Alt text" width="80%"/>
 
 ---
 
