@@ -5,7 +5,7 @@ This project demonstrates the core building blocks of transformer architectures,
 
 ---
 
-## Features
+## 🚀 Features
 - **Custom Transformer Implementation**  
   - Causal multi-head self-attention  
   - Pre-LayerNorm residual connections  
@@ -24,7 +24,7 @@ This project demonstrates the core building blocks of transformer architectures,
   - The pre-trained model is adapted with a classification head for prediction
 
 
-## GPT-2 Architecture Components
+## 🏗 GPT-2 Architecture Components
 ![GPT Architecture](images/gpt2.png)
 
 The GPT-2 model in this project is built from scratch and consists of the following key components:
@@ -93,11 +93,11 @@ Each transformer block contains:
 | Tool / Library | Version |
 |----------------|---------|
 | Python         | 3.11+   |
-| PyTorch        | 2.1.0   |
+| PyTorch        | 2.4.1   |
 | tiktoken       | 0.4.0   |
 | Pandas         | 2.1.0   |
 | NumPy          | 1.26.0  |
 | Matplotlib     | 3.8.0   |
 | TQDM           | 4.66.1  |
-| CUDA Toolkit   | 12.2+   |
+| CUDA Toolkit   | 12.4    |
 | Git            | 2.42+   |
