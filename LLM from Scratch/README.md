@@ -83,7 +83,6 @@ Each transformer block contains:
 - **Temperature and Top-k Filtering:** Controls randomness and diversity during generation.
 - **Early Stopping:** Stops generation when EOS token is produced.
 
-![Autoregressive Generation](images/autoregressive_generation.png)
 
 ---
 
