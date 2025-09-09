@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from functools import partial
-import GPT2WeightLoader
+from weight_loader import GPT2WeightLoader
 import copy
 from tqdm import tqdm
 import matplotlib.pyplot as plt

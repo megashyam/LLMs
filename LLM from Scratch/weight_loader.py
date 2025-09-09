@@ -3,7 +3,7 @@ import json
 import numpy as np
 import tensorflow as tf
 import torch
-import GPT2
+from gpt_from_scratch import GPT2
 
 """
 Loads Pretrained OpenAI weights onto
