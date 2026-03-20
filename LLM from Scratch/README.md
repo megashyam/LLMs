@@ -5,7 +5,7 @@ This project demonstrates the core building blocks of transformer architectures,
 
 ---
 
-## 🚀 Features
+## Features
 - **Custom Transformer Implementation**  
   - Causal multi-head self-attention  
   - Pre-LayerNorm residual connections  
@@ -24,7 +24,7 @@ This project demonstrates the core building blocks of transformer architectures,
   - The pre-trained model is adapted with a classification head for prediction
 
 
-## 🏗 GPT-2 Architecture Components
+## GPT-2 Architecture Components
 
 <img src="images/gpt2.png" alt="Alt text" width="80%"/>
 
